@@ -48,7 +48,6 @@ export default function SignupPage() {
     e.preventDefault();
     setIsLoading(true);
 
-    // Validate password confirmation
     if (formData.password !== formData.confirmPassword) {
       toast({
         variant: "destructive",
@@ -59,7 +58,6 @@ export default function SignupPage() {
       return;
     }
 
-    // Check if email is not admin email
     if (formData.email === "admin@example.com") {
       toast({
         variant: "destructive",
@@ -71,14 +69,11 @@ export default function SignupPage() {
       return;
     }
 
-    // Simulate registration API call
     setTimeout(() => {
-      // Store registration details for login verification
       localStorage.setItem("registeredEmail", formData.email);
       localStorage.setItem("registeredPassword", formData.password);
       localStorage.setItem("registeredRole", formData.role);
 
-      // Also set current session
       localStorage.setItem("userRole", formData.role);
       localStorage.setItem("userEmail", formData.email);
 
@@ -87,8 +82,7 @@ export default function SignupPage() {
         description: "Your account has been created successfully!",
       });
 
-      // Redirect to dashboard
-      router.push("/dashboard");
+      router.push("/login");
       setIsLoading(false);
     }, 1500);
   };
@@ -99,7 +93,7 @@ export default function SignupPage() {
       <div className="hidden md:flex items-center justify-center bg-gray-100">
         <div className="flex items-center justify-center w-32 h-32 bg-white shadow-md">
           <Image
-            src="/placeholder.svg"
+            src="/auth.png"
             alt="Logo"
             width={100}
             height={100}

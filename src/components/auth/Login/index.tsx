@@ -9,9 +9,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
 
-// Only admin is predefined, other users will register through signup
+// Only admin is predefined
 const ADMIN_CREDENTIALS = {
-  email: "admin@example.com",
+  email: "admin@test.com",
   password: "admin123",
   role: "admin",
 };
@@ -28,7 +28,6 @@ export default function LoginPage() {
     setIsLoading(true);
     setError("");
 
-    // Simulate authentication delay
     setTimeout(() => {
       // Check if admin credentials match
       if (
@@ -46,7 +45,6 @@ export default function LoginPage() {
 
         router.push("/dashboard");
       } else {
-        // For regular users, check if they've registered (in localStorage)
         const storedEmail = localStorage.getItem("registeredEmail");
         const storedPassword = localStorage.getItem("registeredPassword");
         const storedRole = localStorage.getItem("registeredRole");
@@ -56,7 +54,6 @@ export default function LoginPage() {
           storedPassword === password &&
           storedRole
         ) {
-          // Login successful for registered user
           localStorage.setItem("userRole", storedRole);
           localStorage.setItem("userEmail", email);
 
@@ -67,7 +64,6 @@ export default function LoginPage() {
 
           router.push("/dashboard");
         } else {
-          // Login failed
           setError("Invalid email or password");
           toast({
             variant: "destructive",
@@ -87,7 +83,7 @@ export default function LoginPage() {
       <div className="hidden md:flex items-center justify-center bg-gray-100">
         <div className="flex items-center justify-center w-32 h-32 bg-white shadow-md">
           <Image
-            src="/placeholder.svg"
+            src="/auth.png"
             alt="Logo"
             width={100}
             height={100}

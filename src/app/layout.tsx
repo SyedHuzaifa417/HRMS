@@ -13,7 +13,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "HRMS",
+  title: {
+    default: "HRMS",
+    template: "HRMS - %s",
+  },
   description: "Human Resource Management System",
 };
 
