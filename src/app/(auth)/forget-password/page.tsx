@@ -1,6 +1,6 @@
-import ResetPasswordPage from "@/components/auth/ResetPassword";
 import React from "react";
 import { Metadata } from "next";
+import PasswordResetPage from "@/components/auth/forgetPassword";
 
 export const metadata: Metadata = {
   title: "Reset Password",
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 const page = () => {
-  return <ResetPasswordPage />;
+  return <PasswordResetPage />;
 };
 
 export default page;

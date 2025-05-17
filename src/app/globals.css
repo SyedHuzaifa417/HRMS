@@ -4,6 +4,10 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --color-charcoal: #1e1e1e;
+  --color-gray-soft: #d9d9d9;
+  --color-gray-lite: #f4f4f4;
+  --color-gray-dark: #b2b2b2;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -110,6 +114,31 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+}
+
+.overflowY::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+  background-color: transparent;
+}
+
+.overflowY::-webkit-scrollbar-thumb {
+  background-color: #585757;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.overflowY::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.overflowY::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(128, 126, 126);
+  cursor: pointer;
+}
+
+.nav::-webkit-scrollbar {
+  display: none;
 }
 
 @layer base {

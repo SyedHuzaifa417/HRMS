@@ -23,6 +23,7 @@ const SelectTrigger = React.forwardRef<
       className
     )}
     {...props}
+    suppressHydrationWarning
   >
     {children}
     <SelectPrimitive.Icon asChild>
@@ -43,6 +44,7 @@ const SelectScrollUpButton = React.forwardRef<
       className
     )}
     {...props}
+    suppressHydrationWarning
   >
     <ChevronUp className="h-4 w-4" />
   </SelectPrimitive.ScrollUpButton>
@@ -60,6 +62,7 @@ const SelectScrollDownButton = React.forwardRef<
       className
     )}
     {...props}
+    suppressHydrationWarning
   >
     <ChevronDown className="h-4 w-4" />
   </SelectPrimitive.ScrollDownButton>
@@ -82,6 +85,7 @@ const SelectContent = React.forwardRef<
       )}
       position={position}
       {...props}
+      suppressHydrationWarning
     >
       <SelectScrollUpButton />
       <SelectPrimitive.Viewport
@@ -107,6 +111,7 @@ const SelectLabel = React.forwardRef<
     ref={ref}
     className={cn("py-1.5 pl-8 pr-2 text-sm font-semibold", className)}
     {...props}
+    suppressHydrationWarning
   />
 ));
 SelectLabel.displayName = SelectPrimitive.Label.displayName;
@@ -122,6 +127,7 @@ const SelectItem = React.forwardRef<
       className
     )}
     {...props}
+    suppressHydrationWarning
   >
     <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <SelectPrimitive.ItemIndicator>
@@ -142,6 +148,7 @@ const SelectSeparator = React.forwardRef<
     ref={ref}
     className={cn("-mx-1 my-1 h-px bg-muted", className)}
     {...props}
+    suppressHydrationWarning
   />
 ));
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName;

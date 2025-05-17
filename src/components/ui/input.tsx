@@ -14,6 +14,7 @@ const Input = React.forwardRef<
       )}
       ref={ref}
       {...props}
+      suppressHydrationWarning
     />
   );
 });

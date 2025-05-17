@@ -1,4 +1,4 @@
-import DashboardRouter from "@/components/dashboard/common/DashboardRouter";
+import DashboardLayout from "@/components/dashboard/layout/DashboardLayout";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function DashboardPage() {
-  return <DashboardRouter />;
+  return <DashboardLayout />;
 }

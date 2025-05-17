@@ -18,6 +18,7 @@ const ToastViewport = React.forwardRef<
       className
     )}
     {...props}
+    suppressHydrationWarning
   />
 ));
 ToastViewport.displayName = ToastPrimitives.Viewport.displayName;

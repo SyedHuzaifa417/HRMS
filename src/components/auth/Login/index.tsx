@@ -80,10 +80,10 @@ export default function LoginPage() {
   return (
     <div className="w-full h-screen grid md:grid-cols-2">
       {/* image side */}
-      <div className="hidden md:flex items-center justify-center bg-gray-100">
-        <div className="flex items-center justify-center w-32 h-32 bg-white shadow-md">
+      <div className="hidden md:flex items-center justify-center bg-gray-soft">
+        <div className="flex items-center justify-center w-32 h-32 ">
           <Image
-            src="/auth.png"
+            src="/auth/imagePlaceholder.png"
             alt="Logo"
             width={100}
             height={100}
@@ -141,7 +141,7 @@ export default function LoginPage() {
               />
               <div className="flex justify-end mt-1">
                 <Link
-                  href="/reset-password"
+                  href="/forget-password"
                   className="text-xs text-gray-700 hover:underline"
                 >
                   Forgot Password?

@@ -90,17 +90,17 @@ export default function SignupPage() {
   return (
     <div className="w-full h-screen grid md:grid-cols-2">
       {/* image side */}
-      <div className="hidden md:flex items-center justify-center bg-gray-100">
-        <div className="flex items-center justify-center w-32 h-32 bg-white shadow-md">
-          <Image
-            src="/auth.png"
-            alt="Logo"
-            width={100}
-            height={100}
-            className="object-cover"
-          />
-        </div>
-      </div>
+      <div className="hidden md:flex items-center justify-center bg-gray-soft">
+           <div className="flex items-center justify-center w-32 h-32 ">
+                <Image
+                  src="/auth/imagePlaceholder.png"
+                  alt="Logo"
+                  width={100}
+                  height={100}
+                  className="object-cover"
+                />
+              </div>
+            </div>
 
       {/* Right side  */}
       <div className="overflow-y-auto overflow-x-hidden">
