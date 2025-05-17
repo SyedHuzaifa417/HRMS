@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { toast } from "sonner";
 import { EmailForm } from "./components/EmailForm";
 import { OtpVerification } from "./components/OtpVerification";
 import { ResetPasswordForm } from "./components/ResetPasswordForm";
 import { SuccessMessage } from "./components/SuccessMessage";
-import Image from "next/image";
 
 type PasswordResetStage = "email" | "otp" | "reset" | "success";
 
@@ -22,18 +22,16 @@ export default function PasswordResetPage() {
     setMounted(true);
   }, []);
 
-
   const handleEmailSubmit = async (email: string) => {
     setIsSubmitting(true);
     try {
-     
       setEmail(email);
-      
+
       toast.success("OTP sent to your email", {
         position: "bottom-right",
         duration: 3000,
       });
-      
+
       setStage("otp");
     } catch (error) {
       console.error("Error sending OTP:", error);
@@ -53,66 +51,65 @@ export default function PasswordResetPage() {
     }
   };
 
-  
-  const handleOtpSubmit =  () => {
+  const handleOtpSubmit = () => {
     setIsSubmitting(true);
     try {
-      
-      
       toast.success("OTP verified successfully", {
         position: "bottom-right",
         duration: 3000,
       });
-      
+
       setStage("reset");
     } catch (error) {
       console.error("Error verifying OTP:", error);
-    if (error instanceof Error) {
-      toast.error(error.message || "Failed to verify OTP. Please try again.", {
-        position: "bottom-right",
-        duration: 3000,
-      });
-    } else {
-      toast.error("Something went wrong. Please try again.", {
-        position: "bottom-right",
-        duration: 3000,
-      });
-    }
+      if (error instanceof Error) {
+        toast.error(
+          error.message || "Failed to verify OTP. Please try again.",
+          {
+            position: "bottom-right",
+            duration: 3000,
+          }
+        );
+      } else {
+        toast.error("Something went wrong. Please try again.", {
+          position: "bottom-right",
+          duration: 3000,
+        });
+      }
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  
   const handlePasswordReset = () => {
     setIsSubmitting(true);
     try {
-      
       toast.success("Password reset successfully", {
         position: "bottom-right",
         duration: 3000,
       });
-      
+
       setStage("success");
     } catch (error) {
       console.error("Error resetting password:", error);
-     if (error instanceof Error) {
-      toast.error(error.message || "Failed to reset password. Please try again.", {
-        position: "bottom-right",
-        duration: 3000,
-      });
-    } else {
-      toast.error("Something went wrong. Please try again.", {
-        position: "bottom-right",
-        duration: 3000,
-      });
-    }
+      if (error instanceof Error) {
+        toast.error(
+          error.message || "Failed to reset password. Please try again.",
+          {
+            position: "bottom-right",
+            duration: 3000,
+          }
+        );
+      } else {
+        toast.error("Something went wrong. Please try again.", {
+          position: "bottom-right",
+          duration: 3000,
+        });
+      }
     } finally {
       setIsSubmitting(false);
     }
   };
-
-  
 
   if (!mounted) {
     return null;
@@ -131,12 +128,12 @@ export default function PasswordResetPage() {
               className="object-cover"
             />
             <span className="text-xl font-bold">Flexify</span>
-             </Link>
+          </Link>
           {stage === "email" && (
-              <EmailForm
-                onSubmit={handleEmailSubmit}
-                isSubmitting={isSubmitting}
-              />
+            <EmailForm
+              onSubmit={handleEmailSubmit}
+              isSubmitting={isSubmitting}
+            />
           )}
 
           {stage === "otp" && (
@@ -148,15 +145,13 @@ export default function PasswordResetPage() {
           )}
 
           {stage === "reset" && (
-              <ResetPasswordForm
-                onSubmit={handlePasswordReset}
-                isSubmitting={isSubmitting}
-              />
+            <ResetPasswordForm
+              onSubmit={handlePasswordReset}
+              isSubmitting={isSubmitting}
+            />
           )}
 
-          {stage === "success" && (
-            <SuccessMessage />
-          )}
+          {stage === "success" && <SuccessMessage />}
         </div>
       </div>
     </div>
