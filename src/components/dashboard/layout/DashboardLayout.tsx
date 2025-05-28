@@ -108,7 +108,6 @@ export default function DashboardLayout() {
   return (
     <div className="flex flex-col h-screen">
       <div className="flex flex-1 overflow-hidden">
-        <Toaster />
         <Sidebar
           userRole={role}
           isOpen={isSidebarOpen}
@@ -124,6 +123,7 @@ export default function DashboardLayout() {
             }}
           />
           <main className="p-4 max-lg:p-2">
+            <Toaster />
             {currentRoute && (
               <div>
                 <Header toggleSidebar={toggleSidebar} />

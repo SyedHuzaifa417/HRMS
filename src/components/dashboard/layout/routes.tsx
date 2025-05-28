@@ -16,6 +16,9 @@ import AdminDashboard from "../Admin/dashboard";
 import EmployeeDashboard from "../Employee/dashboard";
 import TeamLeaderProfile from "../TeamLeader/dashboard/Profile/index";
 import TeamLeaderDashboard from "../TeamLeader/dashboard";
+import Payroll from "../TeamLeader/dashboard/Payroll";
+import MyData from "../Employee/dashboard/MyData";
+import AdminEmployees from "../Admin/employee";
 
 export interface Route {
   path: string;
@@ -29,22 +32,7 @@ export interface Route {
   }[];
 }
 
-const AdminAttendance = () => (
-  <div className="p-4">Admin Attendance Management</div>
-);
-const AdminEmployees = () => <div className="p-4">Employee Management</div>;
-const AdminLogs = () => <div className="p-4">System Logs</div>;
-const AdminReports = () => <div className="p-4">Reports</div>;
-const AdminSettings = () => <div className="p-4">System Settings</div>;
 
-const TeamLeaderAttendance = () => <div className="p-4">Team Attendance</div>;
-const TeamLeaderReports = () => <div className="p-4">Team Reports</div>;
-const TeamLeaderSettings = () => (
-  <div className="p-4">Team Leader Settings</div>
-);
-
-const EmployeeMyData = () => <div className="p-4">Employee My Data</div>;
-const EmployeeStats = () => <div className="p-4">Employee Stats</div>;
 
 export const adminRoutes: Route[] = [
   {
@@ -63,37 +51,37 @@ export const adminRoutes: Route[] = [
     path: "/attendance",
     title: "Attendance",
     icon: <RxTimer size={20} />,
-    component: AdminAttendance,
+    component: AdminDashboard,
   },
   {
     path: "/leave",
     title: "Leave Management",
     icon: <Timer size={20} />,
-    component: AdminLogs,
+    component: AdminDashboard,
   },
   {
     path: "/payroll",
     title: "Payroll",
     icon: <CgCreditCard size={20} className="rotate-180" />,
-    component: AdminLogs,
+    component: AdminDashboard,
   },
   {
     path: "/performance",
     title: "Performance",
     icon: <SlSpeedometer size={20} />,
-    component: AdminSettings,
+    component: AdminDashboard,
   },
   {
     path: "/teams",
     title: "Teams",
     icon: <PiCirclesThree size={20} />,
-    component: AdminReports,
+    component: AdminDashboard,
   },
   {
     path: "/messages",
     title: "Messages",
     icon: <MessageSquareMore size={20} />,
-    component: AdminReports,
+    component: AdminDashboard,
   },
 ];
 
@@ -105,38 +93,38 @@ export const teamLeaderRoutes: Route[] = [
     component: TeamLeaderDashboard,
     nestedRoutes: [
       { title: "My Profile", path: "/profile", component: TeamLeaderProfile },
-      { title: "Payroll", path: "/payroll", component: () => <div>hello</div> },
+      { title: "Payroll", path: "/payroll", component: Payroll },
     ],
   },
   {
     path: "/attendance",
     title: "Attendance",
     icon: <Calendar size={20} />,
-    component: TeamLeaderAttendance,
+    component: AdminDashboard,
   },
   {
     path: "/leave",
     title: "Leave Management",
     icon: <Timer size={20} />,
-    component: AdminLogs,
+    component: AdminDashboard,
   },
   {
     path: "/performance",
     title: "Performance",
     icon: <SlSpeedometer size={20} />,
-    component: AdminSettings,
+    component: AdminDashboard,
   },
   {
     path: "/teams",
     title: "Teams",
     icon: <PiCirclesThree size={20} />,
-    component: TeamLeaderReports,
+    component: AdminDashboard,
   },
   {
     path: "/messages",
     title: "Messages",
     icon: <MessageSquareMore size={20} />,
-    component: TeamLeaderSettings,
+    component: AdminDashboard,
   },
 ];
 
@@ -150,12 +138,12 @@ export const employeeRoutes: Route[] = [
       {
         path: "/my-data",
         title: "My Data",
-        component: EmployeeMyData,
+        component: MyData,
       },
       {
         path: "/stats",
         title: "Stats",
-        component: EmployeeStats,
+        component: AdminDashboard,
       },
     ],
   },
@@ -163,37 +151,37 @@ export const employeeRoutes: Route[] = [
     path: "/attendance",
     title: "Attendance",
     icon: <RxTimer size={25} />,
-    component: AdminAttendance,
+    component: AdminDashboard,
   },
   {
     path: "/leave",
     title: "Leave Management",
     icon: <Timer size={25} />,
-    component: AdminLogs,
+    component: AdminDashboard,
   },
   {
     path: "/payroll",
     title: "Payroll",
     icon: <CgCreditCard size={25} className="rotate-180" />,
-    component: AdminLogs,
+    component: AdminDashboard,
   },
   {
     path: "/performance",
     title: "Performance",
     icon: <SlSpeedometer size={25} />,
-    component: AdminSettings,
+    component: AdminDashboard,
   },
   {
     path: "/teams",
     title: "Teams",
     icon: <PiCirclesThree size={25} />,
-    component: AdminReports,
+    component: AdminDashboard,
   },
   {
     path: "/messages",
     title: "Messages",
     icon: <MessageSquareMore size={25} />,
-    component: AdminReports,
+    component: AdminDashboard,
   },
 ];
 

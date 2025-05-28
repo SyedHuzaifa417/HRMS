@@ -130,3 +130,119 @@ export const mockMessages = [
     status: "sent" as const,
   },
 ];
+
+export interface Employee {
+  id: string;
+  name: string;
+  position: string;
+  location: string;
+  phone: string;
+  rating?:string;
+  email: string;
+  isOffline: boolean;
+  onLeave?: boolean;
+}
+
+export const allEmployees: Employee[] = [
+  {
+    id: '1',
+    name: 'Ahmad Ali',
+    position: 'UX Designer',
+    rating: "4.5",
+    location: 'Remote | Lahore',
+    phone: '+92 232 345 5698',
+    email: 'ahmadali@email.com',
+    isOffline: true,
+    onLeave: true,
+  },
+  {
+    id: '2',
+    name: 'Hamza Farhan',
+    position: 'Accounts Manager',
+    location: 'Remote | Gujranwala',
+    phone: '+92 232 345 5698',
+    email: 'hamzaf@email.com',
+    isOffline: true,
+    onLeave: true,
+  },
+  {
+    id: '3',
+    name: 'Sohail Saqib',
+    position: 'Graphic Designer',
+    location: 'Remote | Lahore',
+    phone: '+92 232 345 5698',
+    email: 'saqibsohail@email.com',
+    isOffline: true,
+    onLeave: false,
+  },
+  {
+    id: '4',
+    name: 'Khunsa Khan',
+    position: 'Web Designer',
+    location: 'Remote | Karachi',
+    phone: '+92 232 345 5698',
+    email: 'khunsakhan@email.com',
+    isOffline: false,
+    onLeave: false,
+  },
+  {
+    id: '5',
+    name: 'Asghar Ali',
+    position: 'Product Developer',
+    location: 'In-house | Islamabad',
+    phone: '+92 232 345 5698',
+    email: 'asgharali@email.com',
+    isOffline: false,
+    onLeave: false,
+  },
+  {
+    id: '6',
+    name: 'Faiza Khan',
+    position: 'Marketing',
+    location: 'In-house | Islamabad',
+    phone: '+92 232 345 5698',
+    email: 'faizakhan@email.com',
+    isOffline: false,
+    onLeave: false,
+  },
+  {
+    id: '7',
+    name: 'Farhan Agha',
+    position: 'Consultant',
+    location: 'In-house | Islamabad',
+    phone: '+92 232 345 5698',
+    email: 'farhanagha@email.com',
+    isOffline: false,
+    onLeave: false,
+  },
+  {
+    id: '8',
+    name: 'Zarik Shehzad',
+    position: 'Sr. Designer',
+    location: 'In-house | Islamabad',
+    phone: '+92 232 345 5698',
+    email: 'zarikshehzad@email.com',
+    isOffline: false,
+    onLeave: false,
+  },
+  {
+    id: '9',
+    name: 'Shahid Usman',
+    position: 'Product Developer',
+    location: 'In-house | Islamabad',
+    phone: '+92 232 345 5698',
+    email: 'shahidusman@email.com',
+    isOffline: false,
+    onLeave: false,
+  },
+  {
+    id: '10',
+    name: 'Nafay Butt',
+    position: 'Marketing',
+    location: 'In-house | Islamabad',
+    phone: '+92 232 345 5698',
+    email: 'nafaybutt@email.com',
+    isOffline: false,
+    onLeave: false,
+  },
+];

@@ -1,3 +1,7 @@
+import {
+  EmployeeFormData
+} from "@/components/ui/shared/Forms/types/types";
+
 export const requests = [
   {
     name: "Team Lead",
@@ -67,3 +71,74 @@ export const mockMessages = [
     status: "sent" as const,
   },
 ];
+
+
+export const rawData: EmployeeFormData = {
+  name: "Khunsa Khan",
+  rating: "4.2",
+  employmentType: "Full-time | Remote",
+  location: "Karachi",
+  designation: "UX Designer",
+  dateJoined: "12th August 2022",
+  
+  // Personal details
+  fullName: "Ahmad Ali",
+  email: "ahmadali@email.com",
+  address: "Flat No 25, Orchid Apartments, Street 25, Hussain Chowk.",
+  phone: +923223455698,
+  gender: "Female",
+  age: "25",
+  city: "Lahore",
+  state: "Punjab",
+  fatherName: "Muhammad Ashraf Ali",
+  motherName: "Khadija Ashraf",
+  fatherPhone: +923213450987,
+  motherPhone: +923234560987,
+  bankName: "Meezan Bank",
+  accountHolder: "Ahmad Ali",
+  accountNumber: 1234567890,
+  branchCode: "LHR01",
+  branchAddress: "Zafar Ali Rd, Gulberg, Lahore",
+  
+  // Professional details
+  workExperiences: [
+    {
+      previousDesignation: "UX Design Intern",
+      companyName: "Virtual Sights",
+      workExperience: "6 Month Internship",
+      fromMonth: "June",
+      toMonth: "November",
+    }
+  ],
+  employeeResume: null,
+  referenceLetter: null,
+  linkedin: "https://linkedin.com/in/ahmadali1234",
+  portfolio: "https://www.behance.net/ahmadali54",
+  educations: [
+    {
+      degreeProgram: "BS Design",
+      instituteName: "COMSATS University, Lahore Campus",
+      eduFrom: "2016",
+      eduTo: "2020",
+    }
+  ],
+  certifications: [
+    {
+      certificationName: "Graphic Design Course",
+      certificationInstitute: "Coursera",
+      certificateFrom: "2021",
+      certificateTo: "2022",
+    }
+  ],
+  
+  // Contract details
+  department: "Design Department",
+  contractUrl: null,
+  from: "December 2022",
+  to: "Present",
+  salaryType: "Monthly",
+  monthlySalary: "Rs. 150,000",
+  annualSalary: "Rs. 600,000",
+  paymentRate: "2000 PKR/Day",
+  bonuses: "Yes",
+};

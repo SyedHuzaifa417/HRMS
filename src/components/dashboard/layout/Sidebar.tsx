@@ -34,7 +34,7 @@ const Sidebar = ({ userRole, isOpen = false, onClose }: SidebarProps) => {
     >
       <div
         className={cn(
-          "flex items-start space-x-5 pt-6",
+          "flex items-start space-x-5 pt-6 cursor-pointer",
           isExpanded || isOpen ? "px-8" : "px-5",
           "max-sm:pb-0 max-sm:px-5 max-sm:pt-10"
         )}
