@@ -2,12 +2,12 @@
 
 import React, { useState } from "react";
 import { allEmployees } from "../tempData";
+import EmployeeTable from "./views/TableView";
+import { renderGrid } from "./views/CardView";
 
 import { Switch } from "@/components/ui/switch";
-import { renderGrid } from "./views/CardView";
 import { MdGridView, MdList } from "react-icons/md";
 import { HiPlus } from "react-icons/hi2";
-import EmployeeTable from "./views/TableView";
 import Forms from "@/components/ui/shared/Forms";
 import { EmployeeFormData } from "@/components/ui/shared/Forms/types/types";
 import { Button } from "@/components/ui/button";
