@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import { allEmployees } from "../tempData";
-import EmployeeTable from "@/components/dashboard/Admin/employee/views/TableView";
-import { renderGrid } from "@/components/dashboard/Admin/employee/views/CardView";
+// import EmployeeTable from "@/components/dashboard/Admin/employee/views/TableView";
+// import { CardView } from "@/components/dashboard/Admin/employee/views/CardView";
 
 import { Switch } from "@/components/ui/switch";
 import { MdGridView, MdList } from "react-icons/md";
@@ -12,6 +12,8 @@ import Forms from "@/components/ui/shared/Forms";
 import { EmployeeFormData } from "@/components/ui/shared/Forms/types/types";
 import { Button } from "@/components/ui/button";
 import { IoChevronBack } from "react-icons/io5";
+import { CardView } from "./components/card";
+import { TableView } from "./components/table";
 
 export default function AdminEmployees() {
   const [toggleLeaveView, setToggleLeaveView] = useState(true);
@@ -23,49 +25,49 @@ export default function AdminEmployees() {
     data?: EmployeeFormData;
   }>({ render: false, mode: "add" });
 
-  const mapEmployeeToFormData = (
-    employee: (typeof allEmployees)[0]
-  ): EmployeeFormData => {
-    return {
-      name: employee.name,
-      employmentType: employee.location?.includes("Remote")
-        ? "Remote"
-        : "In-house",
-      location: employee.location,
-      rating: employee.rating,
-      designation: employee.position,
-      fullName: employee.name,
-      email: employee.email,
-      phone: parseInt(employee.phone?.replace(/\D/g, "") || "0"),
+  // const mapEmployeeToFormData = (
+  //   employee: (typeof allEmployees)[0]
+  // ): EmployeeFormData => {
+  //   return {
+  //     name: employee.name,
+  //     employmentType: employee.location?.includes("Remote")
+  //       ? "Remote"
+  //       : "In-house",
+  //     location: employee.location,
+  //     rating: employee.rating,
+  //     designation: employee.position,
+  //     fullName: employee.name,
+  //     email: employee.email,
+  //     phone: parseInt(employee.phone?.replace(/\D/g, "") || "0"),
 
-      // to ensure at least one entry exists for each array
-      workExperiences: [
-        {
-          previousDesignation: "",
-          companyName: "",
-          workExperience: "",
-          fromMonth: "",
-          toMonth: "",
-        },
-      ],
-      educations: [
-        {
-          degreeProgram: "",
-          instituteName: "",
-          eduFrom: "",
-          eduTo: "",
-        },
-      ],
-      certifications: [
-        {
-          certificationName: "",
-          certificationInstitute: "",
-          certificateFrom: "",
-          certificateTo: "",
-        },
-      ],
-    };
-  };
+  //     // to ensure at least one entry exists for each array
+  //     workExperiences: [
+  //       {
+  //         previousDesignation: "",
+  //         companyName: "",
+  //         workExperience: "",
+  //         fromMonth: "",
+  //         toMonth: "",
+  //       },
+  //     ],
+  //     educations: [
+  //       {
+  //         degreeProgram: "",
+  //         instituteName: "",
+  //         eduFrom: "",
+  //         eduTo: "",
+  //       },
+  //     ],
+  //     certifications: [
+  //       {
+  //         certificationName: "",
+  //         certificationInstitute: "",
+  //         certificateFrom: "",
+  //         certificateTo: "",
+  //       },
+  //     ],
+  //   };
+  // };
 
   const handleSubmit = (formData: EmployeeFormData) => {
     console.log("Submitted data:", formData);
@@ -108,17 +110,17 @@ export default function AdminEmployees() {
             </div>
           </header>
           {toggleLeaveView ? (
-            renderGrid(allEmployees.filter((emp) => emp.onLeave))
+            CardView(allEmployees.filter((emp) => emp.onLeave))
           ) : (
-            <EmployeeTable
-              data={allEmployees.filter((emp) => emp.onLeave)}
-              onRowClick={(row) =>
-                setToggleEmployeeForm({
-                  render: true,
-                  mode: "edit",
-                  data: mapEmployeeToFormData(row),
-                })
-              }
+            <TableView
+              // data={allEmployees.filter((emp) => emp.onLeave)}
+              // onRowClick={(row) =>
+              //   setToggleEmployeeForm({
+              //     render: true,
+              //     mode: "edit",
+              //     data: mapEmployeeToFormData(row),
+              //   })
+              // }
             />
           )}
 
@@ -138,17 +140,17 @@ export default function AdminEmployees() {
             </div>
           </header>
           {toggleAllView ? (
-            renderGrid(allEmployees.filter((emp) => !emp.onLeave))
+            CardView(allEmployees.filter((emp) => !emp.onLeave))
           ) : (
-            <EmployeeTable
-              data={allEmployees.filter((emp) => !emp.onLeave)}
-              onRowClick={(row) =>
-                setToggleEmployeeForm({
-                  render: true,
-                  mode: "edit",
-                  data: mapEmployeeToFormData(row),
-                })
-              }
+            <TableView
+              // data={allEmployees.filter((emp) => !emp.onLeave)}
+              // onRowClick={(row) =>
+              //   setToggleEmployeeForm({
+              //     render: true,
+              //     mode: "edit",
+              //     data: mapEmployeeToFormData(row),
+              //   })
+              // }
             />
           )}
         </section>
