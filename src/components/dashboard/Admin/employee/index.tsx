@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import { allEmployees } from "../tempData";
-import EmployeeTable from "./views/TableView";
-import { renderGrid } from "./views/CardView";
+import EmployeeTable from "@/components/dashboard/Admin/employee/views/TableView";
+import { renderGrid } from "@/components/dashboard/Admin/employee/views/CardView";
 
 import { Switch } from "@/components/ui/switch";
 import { MdGridView, MdList } from "react-icons/md";
