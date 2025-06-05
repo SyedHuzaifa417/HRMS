@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/select";
 import { TableFilter } from "../types/types";
 import { MdArrowDropDown } from "react-icons/md";
+import { Button } from "@/components/ui/button";
 
 interface TableFiltersProps {
   filters?: TableFilter[];
@@ -22,6 +23,11 @@ interface TableFiltersProps {
   handleFilterChange: (filterKey: string, value: string) => void;
   clearFilter: (filterKey: string) => void;
   setSearchTerm: (term: string) => void;
+  editing?: {
+    enabled: boolean;
+    isEditing: boolean;
+    onEditSave: () => void;
+  };
 }
 
 const TableFilters: React.FC<TableFiltersProps> = ({
@@ -33,8 +39,12 @@ const TableFilters: React.FC<TableFiltersProps> = ({
   handleFilterChange,
   clearFilter,
   setSearchTerm,
+  editing,
 }) => {
-  const showHeader = ((filters && filters.length > 0 && enabled) || searchConfig?.enabled);
+  const showHeader =
+    (filters && filters.length > 0 && enabled) ||
+    searchConfig?.enabled ||
+    editing?.enabled;
 
   if (!showHeader) return null;
 
@@ -43,20 +53,23 @@ const TableFilters: React.FC<TableFiltersProps> = ({
       {filters && filters.length > 0 && enabled && (
         <div className="flex flex-wrap max-lg:gap-2 max-lg:justify-center gap-4">
           {filters.map((filter) => {
-            const hasValue = filterValues[filter.key] && filterValues[filter.key] !== "all";
-            
+            const hasValue =
+              filterValues[filter.key] && filterValues[filter.key] !== "all";
+
             return (
               <div key={filter.key} className="min-w-40 relative">
                 <Select
                   value={filterValues[filter.key] || ""}
-                  onValueChange={(value) => handleFilterChange(filter.key, value)}
+                  onValueChange={(value) =>
+                    handleFilterChange(filter.key, value)
+                  }
                 >
-                  <SelectTrigger 
-                    id={`filter-${filter.key}`} 
+                  <SelectTrigger
+                    id={`filter-${filter.key}`}
                     className="w-full bg-[#e9e9e9] gap-5 focus:ring-0 shadow-none [&>svg]:hidden pr-10"
                   >
-                    <SelectValue 
-                      placeholder={filter.label} 
+                    <SelectValue
+                      placeholder={filter.label}
                       className="text-charcoal"
                     />
                   </SelectTrigger>
@@ -69,11 +82,11 @@ const TableFilters: React.FC<TableFiltersProps> = ({
                     ))}
                   </SelectContent>
                 </Select>
-                
+
                 <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
                   {hasValue ? (
-                    <X 
-                      className="h-5 w-5 text-[#535151] rounded-full p-0.5 cursor-pointer pointer-events-auto" 
+                    <X
+                      className="h-5 w-5 text-[#535151] rounded-full p-0.5 cursor-pointer pointer-events-auto"
                       onClick={(e) => {
                         e.stopPropagation();
                         clearFilter(filter.key);
@@ -88,19 +101,29 @@ const TableFilters: React.FC<TableFiltersProps> = ({
           })}
         </div>
       )}
-
-      {searchConfig?.enabled && (
-        <div className="relative max-w-40">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-dark" />
-          <input
-            type="text"
-            placeholder= "Search..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full rounded-md border bg-[#e9e9e9] pl-10 pr-4 py-2  focus:outline-none text-charcoal"
-          />
-        </div>
-      )}
+      <div className="flex items-center gap-2">
+        {searchConfig?.enabled && (
+          <div className="relative max-w-40">
+            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-dark" />
+            <input
+              type="text"
+              placeholder="Search..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full rounded-md border bg-[#e9e9e9] pl-10 pr-4 py-2  focus:outline-none text-charcoal"
+            />
+          </div>
+        )}
+        {editing?.enabled && (
+          <Button
+            variant="outline"
+            onClick={editing.onEditSave}
+            className="bg-gray-dark px-6 w-full shadow-none border-none !py-5 text-lg font-normal"
+          >
+            {editing.isEditing ? "Save" : "Edit"}
+          </Button>
+        )}
+      </div>
     </div>
   );
 };

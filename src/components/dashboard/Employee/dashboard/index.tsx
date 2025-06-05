@@ -33,7 +33,7 @@ const EmployeeDashboard = () => {
           <ScheduleCard
             title="Your Schedule"
             items={scheduleItems.slice(0, 4)}
-            cellClassName="grid grid-cols-2 gap-x-2 gap-y-2 items-end"
+            gridClassName="grid grid-cols-2 gap-x-2 gap-y-2 items-end"
           />
         </div>
 

@@ -4,10 +4,10 @@ import React, { useState } from "react";
 import { allEmployees } from "../tempData";
 
 import { Switch } from "@/components/ui/switch";
-import { renderGrid } from "./views/cardView";
+import { renderGrid } from "./views/CardView";
 import { MdGridView, MdList } from "react-icons/md";
 import { HiPlus } from "react-icons/hi2";
-import EmployeeTable from "./views/tableView";
+import EmployeeTable from "./views/TableView";
 import Forms from "@/components/ui/shared/Forms";
 import { EmployeeFormData } from "@/components/ui/shared/Forms/types/types";
 import { Button } from "@/components/ui/button";
@@ -98,7 +98,7 @@ export default function AdminEmployees() {
               <MdList size={25} />
               <Switch
                 id="toggle-view=2"
-                className="data-[state=checked]:bg-[#A8A8A8] data-[state=unchecked]:bg-[#A8A8A8]"
+                className="data-[state=checked]:bg-[#A8A8A8] data-[state=unchecked]:bg-[#A8A8A8] cursor-pointer"
                 onClick={() => {
                   setToggleLeaveView((prev) => !prev);
                 }}
@@ -128,7 +128,7 @@ export default function AdminEmployees() {
               <MdList size={25} />
               <Switch
                 id="toggle-view"
-                className="data-[state=checked]:bg-[#A8A8A8] data-[state=unchecked]:bg-[#A8A8A8]"
+                className="data-[state=checked]:bg-[#A8A8A8] data-[state=unchecked]:bg-[#A8A8A8] cursor-pointer"
                 onClick={() => {
                   setToggleAllView((prev) => !prev);
                 }}

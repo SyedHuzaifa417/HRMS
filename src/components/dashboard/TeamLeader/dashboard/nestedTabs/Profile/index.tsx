@@ -7,7 +7,7 @@ import TimeTracker from "@/components/ui/shared/TimeTracker";
 import ProjectProgress from "@/components/ui/shared/ProgressBar";
 import { Timer, Umbrella } from "lucide-react";
 import { ImUsers } from "react-icons/im";
-import { requests, scheduleItems, mockMessages } from "../../tempData";
+import { requests, scheduleItems, mockMessages } from "../../../tempData";
 import { cn } from "@/lib/utils";
 import { Switch } from "@/components/ui/switch";
 import { useRouter } from "next/navigation";
@@ -22,7 +22,7 @@ const TeamLeaderProfile = () => {
           <span>Team Profile</span>
           <Switch
             id="my-profile"
-            className="data-[state=checked]:bg-[#A8A8A8] data-[state=unchecked]:bg-[#A8A8A8]"
+            className="data-[state=checked]:bg-[#A8A8A8] data-[state=unchecked]:bg-[#A8A8A8] cursor-pointer"
             onClick={() => router.push("/dashboard")}
             defaultChecked={true}
           />
@@ -46,7 +46,7 @@ const TeamLeaderProfile = () => {
           <ScheduleCard
             title="Your Schedule"
             items={scheduleItems.slice(0, 4)}
-            cellClassName="grid grid-cols-2 gap-x-2 gap-y-2 items-end"
+            gridClassName="grid grid-cols-2 gap-x-2 gap-y-2 items-end"
           />
         </div>
 

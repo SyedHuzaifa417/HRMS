@@ -1,13 +1,14 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { TableColumn, TableProps } from "./types/types";
 import TableFilters from "./components/TableFilters";
+import { Input } from "../../input";
 import TablePagination from "./components/TablePagination";
 import { cn } from "@/lib/utils";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { MdArrowDropDown } from "react-icons/md";
 
-function Table<T extends Record<string, unknown>>({
+function Table<T>({
   data,
   columns,
   filters,
@@ -16,17 +17,24 @@ function Table<T extends Record<string, unknown>>({
   className = "",
   rowClassName = "",
   onRowClick,
+  editing,
   scrollAreaHeight,
 }: TableProps<T>) {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterValues, setFilterValues] = useState<Record<string, string>>({});
   const [expandedRow, setExpandedRow] = useState<number | null>(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editData, setEditData] = useState<T[]>([]);
 
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
 
+  useEffect(() => {
+    setEditData(data);
+  }, [data]);
+
   const filteredData = useMemo(() => {
-    let result = [...data];
+    let result = [...(isEditing ? editData : data)];
 
     if (filters && Object.keys(filterValues).length > 0) {
       result = result.filter((row) => {
@@ -57,7 +65,15 @@ function Table<T extends Record<string, unknown>>({
     }
 
     return result;
-  }, [data, filterValues, searchTerm, searchConfig, filters]);
+  }, [
+    data,
+    filterValues,
+    searchTerm,
+    searchConfig,
+    filters,
+    isEditing,
+    editData,
+  ]);
 
   const totalPages = pagination.enabled
     ? Math.ceil(filteredData.length / (pagination.pageSize || 10))
@@ -89,6 +105,24 @@ function Table<T extends Record<string, unknown>>({
     });
   };
 
+  const handleEdit = React.useCallback(
+    (rowIndex: number, key: keyof T, value: string) => {
+      setEditData((prevData) => {
+        const updated = [...prevData];
+        updated[rowIndex] = { ...updated[rowIndex], [key]: value };
+        return updated;
+      });
+    },
+    []
+  );
+
+  const handleSaveEdit = () => {
+    if (isEditing) {
+      editing?.onSave?.(editData);
+    }
+    setIsEditing(!isEditing);
+  };
+
   const showRoundedTopCorners = !filters?.enabled && !searchConfig?.enabled;
 
   const getColumnWidth = (column: TableColumn<T>) => {
@@ -96,9 +130,32 @@ function Table<T extends Record<string, unknown>>({
 
     const totalColumns = columns.length;
     if (totalColumns <= 4) return "25%";
-    if (totalColumns <= 6) return "56.666%";
+    if (totalColumns <= 6) return "16.666%";
     return `${100 / totalColumns}%`;
   };
+
+  const editableColumns = useMemo(() => {
+    if (!isEditing) return columns;
+
+    return columns.map((column) => ({
+      ...column,
+      render: (value: unknown, row: T, index: number) => {
+        if (isEditing) {
+          return (
+            <div>
+              <Input
+                type={typeof value === "string" ? "text" : "number"}
+                value={String(value)}
+                onChange={(e) => handleEdit(index, column.key, e.target.value)}
+                className="w-full border-none outline-none shadow-none focus-visible:ring-0"
+              />
+            </div>
+          );
+        }
+        return column.render ? column.render(value, row, index) : String(value);
+      },
+    }));
+  }, [columns, isEditing, handleEdit]);
 
   return (
     <div className={className}>
@@ -111,9 +168,18 @@ function Table<T extends Record<string, unknown>>({
         handleFilterChange={handleFilterChange}
         clearFilter={clearFilter}
         setSearchTerm={setSearchTerm}
+        editing={
+          editing
+            ? {
+                enabled: true,
+                isEditing: isEditing,
+                onEditSave: handleSaveEdit,
+              }
+            : undefined
+        }
       />
-      
-       {/* for tablet and mobile */}
+
+      {/* for tablet and mobile */}
       {isSmallScreen ? (
         <div
           className={`border border-charcoal overflow-hidden p-2 ${
@@ -125,7 +191,9 @@ function Table<T extends Record<string, unknown>>({
           >
             <div className="bg-white divide-y divide-charcoal">
               {paginatedData.map((row, rowIndex) => {
-                const nameColumn = columns.find((col) => col.key === "name");
+                const nameColumn = columns.find(
+                  (col) => col.key === "name" || col.key === "leaveType"
+                );
                 const isExpanded = expandedRow === rowIndex;
 
                 return (
@@ -143,7 +211,9 @@ function Table<T extends Record<string, unknown>>({
                               row,
                               rowIndex
                             )
-                          : String(row[nameColumn?.key || "name"] || "-")}
+                          : String(
+                              row[nameColumn?.key as keyof typeof row] || "-"
+                            )}
                       </div>
 
                       <MdArrowDropDown
@@ -157,7 +227,7 @@ function Table<T extends Record<string, unknown>>({
                     {isExpanded && (
                       <div className="px-4 pb-5 ">
                         <div className="flex flex-col gap-3">
-                          {columns
+                          {editableColumns
                             .filter((col) => col.key !== "name")
                             .map((column) => (
                               <div
@@ -203,12 +273,12 @@ function Table<T extends Record<string, unknown>>({
           <div className="bg-gray-soft sticky top-0 z-10 pt-2 px-2">
             <table className="w-full table-fixed">
               <thead>
-                <tr className="divide-x divide-charcoal">
-                  {columns.map((column) => (
+                <tr className="divide-x-2 divide-charcoal">
+                  {editableColumns.map((column) => (
                     <th
                       key={String(column.key)}
                       className={cn(
-                        "p-4 text-left text-base font-medium text-chacoal capitalize",
+                        "p-4 text-center text-base font-medium text-charcoal capitalize",
                         getColumnWidth(column)
                       )}
                     >
@@ -221,9 +291,14 @@ function Table<T extends Record<string, unknown>>({
           </div>
 
           {/* Scrollable Body */}
-          <div className={cn("pb-2 mx-2", scrollAreaHeight)}>
+          <ScrollArea
+            className={cn(
+              "pb-2 mx-2 scrollbar-hide overflow-auto",
+              scrollAreaHeight
+            )}
+          >
             <table className="w-full table-fixed">
-              <tbody className="bg-white divide-y divide-charcoal">
+              <tbody className="bg-white divide-y-2 divide-charcoal">
                 {paginatedData.length === 0 ? (
                   <tr>
                     <td
@@ -243,12 +318,12 @@ function Table<T extends Record<string, unknown>>({
                       )}
                       onClick={() => onRowClick?.(row, rowIndex)}
                     >
-                      {columns.map((column, colIndex) => (
+                      {editableColumns.map((column, colIndex) => (
                         <td
                           key={String(column.key)}
-                          className={`py-4 px-4 text-sm text-charcoal truncate ${
+                          className={`py-4 px-4 text-sm text-charcoal truncate text-center ${
                             colIndex < columns.length - 1
-                              ? "border-r border-charcoal"
+                              ? "border-r-2 border-charcoal"
                               : ""
                           } ${getColumnWidth(column)}`}
                         >
@@ -262,7 +337,7 @@ function Table<T extends Record<string, unknown>>({
                 )}
               </tbody>
             </table>
-          </div>
+          </ScrollArea>
         </div>
       )}
 

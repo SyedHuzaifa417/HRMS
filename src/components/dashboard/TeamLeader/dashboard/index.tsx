@@ -59,7 +59,7 @@ const TeamLeaderDashboard = () => {
           <span>Team Profile</span>
           <Switch
             id="team-profile"
-            className="data-[state=checked]:bg-[#A8A8A8] data-[state=unchecked]:bg-[#A8A8A8]"
+            className="data-[state=checked]:bg-[#A8A8A8] data-[state=unchecked]:bg-[#A8A8A8]  cursor-pointer"
             onClick={() => router.push("/profile")}
           />
           <span>My Profile</span>
@@ -134,7 +134,7 @@ const TeamLeaderDashboard = () => {
           <ScheduleCard
             title="Your Schedule"
             items={scheduleItems.slice(0, 6)}
-            cellClassName="grid grid-cols-2 gap-x-4 gap-y-2 items-end"
+            gridClassName="grid grid-cols-2 gap-x-4 gap-y-2 items-end"
           />
         </div>
 

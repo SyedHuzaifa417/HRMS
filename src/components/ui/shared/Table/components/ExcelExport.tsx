@@ -1,17 +1,13 @@
 import React from "react";
 import * as XLSX from "xlsx";
 
-interface ExcelExportProps {
-  data: Record<string, unknown>[];
-  columns: Array<{ key: string | number | symbol; header: string }>;
+interface ExcelExportProps<T> {
+  data: T[];
+  columns: Array<{ key: keyof T; header: string }>;
   filename?: string;
 }
 
-const ExcelExport: React.FC<ExcelExportProps> = ({
-  data,
-  columns,
-  filename = "export.xlsx",
-}) => {
+function ExcelExport<T>({ data, columns, filename = "export.xlsx" }: ExcelExportProps<T>): React.ReactElement {
   const handleExport = () => {
     const workbook = XLSX.utils.book_new();
     
@@ -19,7 +15,7 @@ const ExcelExport: React.FC<ExcelExportProps> = ({
       const formattedRow: Record<string, unknown> = {};
       columns.forEach((column) => {
         const key = String(column.key);
-        formattedRow[column.header] = row[key] || "";
+        formattedRow[column.header] = row[key as keyof typeof row] || "";
       });
       return formattedRow;
     });

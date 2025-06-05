@@ -3,15 +3,21 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { CgGirl } from "react-icons/cg";
-import { MdMailOutline, MdOutlinePhone } from "react-icons/md";
-
 
 interface EmployeeCardContextValue {
-  isOffline?: boolean;
+  status?: {
+    text: string;
+    alternateText?: string;
+    colorClass: string;
+  };
 }
 
 interface EmployeeCardProps extends React.HTMLAttributes<HTMLDivElement> {
-  isOffline?: boolean;
+  status?: {
+    text: string;
+    alternateText?: string;
+    colorClass: string;
+  };
   children: React.ReactNode;
 }
 
@@ -23,23 +29,23 @@ interface EmployeeNameProps extends React.HTMLAttributes<HTMLHeadingElement> {
   children: React.ReactNode;
 }
 
-interface EmployeePositionProps extends React.HTMLAttributes<HTMLParagraphElement> {
+interface EmployeeDetail1Props extends React.HTMLAttributes<HTMLParagraphElement> {
   children: React.ReactNode;
 }
 
-interface EmployeeLocationProps extends React.HTMLAttributes<HTMLParagraphElement> {
+interface EmployeeDetail2Props extends React.HTMLAttributes<HTMLParagraphElement> {
   children: React.ReactNode;
 }
 
-interface EmployeeContactProps extends React.HTMLAttributes<HTMLDivElement> {
+interface EmployeeContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-interface EmployeePhoneProps extends React.HTMLAttributes<HTMLDivElement> {
+interface EmployeeDesc1Props extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-interface EmployeeEmailProps extends React.HTMLAttributes<HTMLDivElement> {
+interface EmployeeDesc2Props extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
@@ -56,9 +62,9 @@ const EmployeeCardContext = React.createContext<EmployeeCardContextValue>({});
 
 
 const EmployeeCard = React.forwardRef<HTMLDivElement, EmployeeCardProps>(
-  ({ isOffline = false, className, children, ...props }, ref) => {
+  ({ status, className, children, ...props }, ref) => {
     return (
-      <EmployeeCardContext.Provider value={{ isOffline }}>
+      <EmployeeCardContext.Provider value={{ status }}>
         <div
           ref={ref}
           className={cn(
@@ -67,13 +73,13 @@ const EmployeeCard = React.forwardRef<HTMLDivElement, EmployeeCardProps>(
           )}
           {...props}
         >
-       
+          {status && (
             <div className="absolute -top-4 -right-6 transform -translate-x-1/2">
-              <div className={cn("px-6 py-2 text-white text-center rounded-full",isOffline ?"bg-black":"bg-[#585757]")}>
-              {isOffline ? "Offline" :"Online"}
+              <div className={cn("px-6 py-2 text-white text-center rounded-full", status.colorClass)}>
+                {status.text}
               </div>
             </div>
-      
+          )}
           {children}
         </div>
       </EmployeeCardContext.Provider>
@@ -117,7 +123,7 @@ const EmployeeName = React.forwardRef<HTMLHeadingElement, EmployeeNameProps>(
 );
 EmployeeName.displayName = "EmployeeName";
 
-const EmployeePosition = React.forwardRef<HTMLParagraphElement, EmployeePositionProps>(
+const EmployeeDetail1 = React.forwardRef<HTMLParagraphElement, EmployeeDetail1Props>(
   ({ className, children, ...props }, ref) => {
     return (
       <p
@@ -130,9 +136,9 @@ const EmployeePosition = React.forwardRef<HTMLParagraphElement, EmployeePosition
     );
   }
 );
-EmployeePosition.displayName = "EmployeePosition";
+EmployeeDetail1.displayName = "EmployeeDetail1";
 
-const EmployeeLocation = React.forwardRef<HTMLParagraphElement, EmployeeLocationProps>(
+const EmployeeDetail2 = React.forwardRef<HTMLParagraphElement, EmployeeDetail2Props>(
   ({ className, children, ...props }, ref) => {
     return (
       <p
@@ -145,9 +151,9 @@ const EmployeeLocation = React.forwardRef<HTMLParagraphElement, EmployeeLocation
     );
   }
 );
-EmployeeLocation.displayName = "EmployeeLocation";
+EmployeeDetail2.displayName = "EmployeeDetail2";
 
-const EmployeeContact = React.forwardRef<HTMLDivElement, EmployeeContactProps>(
+const EmployeeContainer = React.forwardRef<HTMLDivElement, EmployeeContainerProps>(
   ({ className, children, ...props }, ref) => {
     return (
       <div
@@ -160,9 +166,9 @@ const EmployeeContact = React.forwardRef<HTMLDivElement, EmployeeContactProps>(
     );
   }
 );
-EmployeeContact.displayName = "EmployeeContact";
+EmployeeContainer.displayName = "EmployeeContainer";
 
-const EmployeePhone = React.forwardRef<HTMLDivElement, EmployeePhoneProps>(
+const EmployeeDesc1 = React.forwardRef<HTMLDivElement, EmployeeDesc1Props>(
   ({ className, children, ...props }, ref) => {
     return (
       <div
@@ -170,15 +176,14 @@ const EmployeePhone = React.forwardRef<HTMLDivElement, EmployeePhoneProps>(
         className={cn("flex items-center gap-4", className)}
         {...props}
       >
-      <MdOutlinePhone size={25}/>
-        <div className="text-lg">{children}</div>
+        {children}
       </div>
     );
   }
 );
-EmployeePhone.displayName = "EmployeePhone";
+EmployeeDesc1.displayName = "EmployeeDesc1";
 
-const EmployeeEmail = React.forwardRef<HTMLDivElement, EmployeeEmailProps>(
+const EmployeeDesc2 = React.forwardRef<HTMLDivElement, EmployeeDesc2Props>(
   ({ className, children, ...props }, ref) => {
     return (
       <div
@@ -186,13 +191,12 @@ const EmployeeEmail = React.forwardRef<HTMLDivElement, EmployeeEmailProps>(
         className={cn("flex items-center gap-4", className)}
         {...props}
       >
-      <MdMailOutline size={25}/>
-        <div className="text-lg truncate w-48">{children}</div>
+    {children}
       </div>
     );
   }
 );
-EmployeeEmail.displayName = "EmployeeEmail";
+EmployeeDesc2.displayName = "EmployeeDesc2";
 
 const EmployeeActions = React.forwardRef<HTMLDivElement, EmployeeActionsProps>(
   ({ className, children, ...props }, ref) => {
@@ -231,11 +235,11 @@ export {
   EmployeeCard,
   EmployeeAvatar,
   EmployeeName,
-  EmployeePosition,
-  EmployeeLocation,
-  EmployeeContact,
-  EmployeePhone,
-  EmployeeEmail,
+  EmployeeDetail1,
+  EmployeeDetail2,
+  EmployeeContainer,
+  EmployeeDesc1,
+  EmployeeDesc2,
   EmployeeActions,
   EmployeeAction,
 };

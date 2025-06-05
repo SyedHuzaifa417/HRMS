@@ -103,7 +103,7 @@ export default function SignupPage() {
             </div>
 
       {/* Right side  */}
-      <div className="overflow-y-auto overflow-x-hidden">
+      <div className="overflow-y-auto overflowY overflow-x-hidden">
         <div className="w-full max-w-lg mx-auto px-8 py-8">
           <div className="mb-3">
             <h1 className="text-2xl font-bold mb-2">Hello!</h1>

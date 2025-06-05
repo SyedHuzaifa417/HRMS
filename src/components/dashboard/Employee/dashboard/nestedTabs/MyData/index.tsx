@@ -1,7 +1,7 @@
 import React from "react";
 import Forms from "@/components/ui/shared/Forms";
 import { EmployeeFormData } from "@/components/ui/shared/Forms/types/types";
-import { rawData } from "../../tempData";
+import { rawData } from "../../../tempData";
 
 export default function MyData() {
   const handleSubmit = (formData: EmployeeFormData) => {

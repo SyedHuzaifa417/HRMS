@@ -10,12 +10,12 @@ import {
   SelectItem,
   SelectTrigger,
 } from "@/components/ui/select";
-import { RiMenuFold4Fill } from "react-icons/ri";
 import { CgGirl, CgProfile } from "react-icons/cg";
 import { FiChevronDown } from "react-icons/fi";
 import { Search, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
+import { TbLayoutSidebarRightFilled } from "react-icons/tb";
 
 interface HeaderProps {
   toggleSidebar: () => void;
@@ -57,12 +57,12 @@ const MobileHeader = ({ toggleSidebar }: HeaderProps) => {
         <div className="flex items-center gap-3">
           <Button
             onClick={toggleSidebar}
-            className="text-gray-700 focus:outline-none py-0 px-2 h-9"
+            className="text-gray-700 focus:outline-none py-0 px-0.5 h-9"
             aria-label={"Open sidebar"}
             variant={"outline"}
           >
-            <RiMenuFold4Fill
-              size={20}
+            <TbLayoutSidebarRightFilled
+              size={25}
               className="transition-all duration-300"
             />
           </Button>

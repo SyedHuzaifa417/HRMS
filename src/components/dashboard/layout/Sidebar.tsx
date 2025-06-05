@@ -67,7 +67,7 @@ const Sidebar = ({ userRole, isOpen = false, onClose }: SidebarProps) => {
           <X size={24} className="transition-all duration-300" />
         </button>
       )}
-      <nav className="flex-1 overflow-y-auto py-3 overflow-x-hidden ">
+      <nav className="flex-1 overflow-y-auto scrollbar-hide py-3 overflow-x-hidden ">
         <ul
           className={cn(
             "space-y-3 max-sm:px-1 ",
@@ -123,7 +123,7 @@ const Sidebar = ({ userRole, isOpen = false, onClose }: SidebarProps) => {
                                 "flex items-center py-1.5 pl-16 pr-4 rounded-md transition-all duration-300 text-base font-medium text-gray-600 hover:text-charcoal"
                               )}
                             >
-                              <span className="transition-all duration-300">
+                              <span className="transition-all duration-300 max-w-36">
                                 {nestedRoute.title}
                               </span>
                             </Link>

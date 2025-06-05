@@ -2,7 +2,7 @@ export interface TableColumn<T> {
   key: keyof T;
   header: string;
   className?: string;
-  render?: (value: T[keyof T], row: T, index: number) => React.ReactNode;
+  render?: (value: unknown, row: T, index: number) => React.ReactNode;
   searchable?: boolean;
 }
 
@@ -16,7 +16,7 @@ export interface TableFilter {
 export interface TableProps<T> {
   data: T[];
   columns: TableColumn<T>[];
-  filters?: {filters:TableFilter[],enabled:boolean};
+  filters?: { filters: TableFilter[]; enabled: boolean };
   searchConfig?: {
     enabled: boolean;
     columns: (keyof T)[];
@@ -31,4 +31,9 @@ export interface TableProps<T> {
   rowClassName?: string;
   onRowClick?: (row: T, index: number) => void;
   scrollAreaHeight?: string;
+  editing?: {
+    enabled: boolean;
+    isEditing: boolean;
+    onSave: (data: T[]) => void;
+  };
 }

@@ -96,15 +96,17 @@ export default function TimeTracker() {
 
   const handleStart = () => {
     if (timerState === "idle") {
-      const startTime = new Date().toLocaleTimeString([], {
+      const now = new Date();
+      const startTime =  now.toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
       });
+      const startIsoTime = now.toISOString();
       setLog((prevLog) => ({
         ...prevLog,
         start: startTime,
       }));
-      console.log("Work started at:", startTime);
+      console.log("Work started at:", startIsoTime);
     }
     setTimerState("running");
   };
@@ -114,40 +116,36 @@ export default function TimeTracker() {
       alert("You can only take a break after 1 PM");
       return;
     }
-
+  
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
     }
-
-    // Deduct 1 hour from time left
+  
     setTimeLeft((prev) => Math.max(0, prev - BREAK_DURATION));
-
-    // Calculate break end time (1 hour after current time)
+  
     const breakStartTime = new Date();
-    const breakEndTime = new Date(
-      breakStartTime.getTime() + BREAK_DURATION * 1000
-    );
-
-    const formatTime = (date: Date): string => {
-      return date.toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-      });
-    };
-
-    const breakText = `${formatTime(breakStartTime)} to ${formatTime(
-      breakEndTime
-    )}`;
-
+    const breakEndTime = new Date(breakStartTime.getTime() + BREAK_DURATION * 1000);
+  
+    const displayTime = `${breakStartTime.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    })} to ${breakEndTime.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    })}`;
+  
+    const isoStartBreak = breakStartTime.toISOString();
+    const isoEndBreak = breakEndTime.toISOString();
+  
     setLog((prevLog) => ({
       ...prevLog,
-      break: breakText,
+      break: displayTime,
     }));
-    console.log("Break taken:", breakText);
-
+    console.log("Break taken (ISO):", `${isoStartBreak} to ${isoEndBreak}`);
+  
     setBreakTaken(true);
     setTimerState("paused");
-  };
+  };  
 
   const handleEnd = () => {
     if (!canEndWork()) {
@@ -159,15 +157,17 @@ export default function TimeTracker() {
       clearInterval(intervalRef.current);
     }
     setTimerState("ended");
-    const endTime = new Date().toLocaleTimeString([], {
+    const now = new Date()
+    const endTime = now.toLocaleTimeString([], {
       hour: "2-digit",
       minute: "2-digit",
     });
+    const endIsoTime=now.toISOString()
     setLog((prevLog) => ({
       ...prevLog,
       end: endTime,
     }));
-    console.log("Work ended at:", endTime);
+    console.log("Work ended at:", endIsoTime);
   };
 
   const formatDuration = (secs: number): string => {

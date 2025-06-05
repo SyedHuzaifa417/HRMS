@@ -1,24 +1,39 @@
 "use client";
 
 import React from "react";
+
+// Admin Routes
+import AdminDashboard from "../Admin/dashboard";
+import AdminEmployees from "../Admin/employee";
+import AdminAttendance from "../Admin/attendance";
+import AdminReports from "../Admin/attendance/nestedTabs/Reports";
+import FlaggedEmployees from "../Admin/attendance/nestedTabs/FlaggedEmployees";
+import ManageWarningLog from "../Admin/attendance/nestedTabs/ManageWarningLog";
+import AdminLeaveManagement from "../Admin/leaveManagement";
+import SetUpLeaves from "../Admin/leaveManagement/nestedTabs/SetUpLeaves";
+import LeaveBalance from "../Admin/leaveManagement/nestedTabs/LeaveBalance";
+//Team Leader Routes
+import TeamLeaderDashboard from "../TeamLeader/dashboard";
+import TeamLeaderProfile from "../TeamLeader/dashboard/nestedTabs/Profile/index";
+import Payroll from "../TeamLeader/dashboard/nestedTabs/Payroll";
+//Employee Routes
+import EmployeeDashboard from "../Employee/dashboard";
+import MyData from "../Employee/dashboard/nestedTabs/MyData";
+
+import { RxTimer } from "react-icons/rx";
+import { HiUsers } from "react-icons/hi2";
+import { CgCreditCard } from "react-icons/cg";
+import { PiCirclesThree } from "react-icons/pi";
+import { SlSpeedometer } from "react-icons/sl";
 import {
   LayoutDashboard,
   Calendar,
   Timer,
   MessageSquareMore,
 } from "lucide-react";
-import { RxTimer } from "react-icons/rx";
-import { HiUsers } from "react-icons/hi2";
-import { CgCreditCard } from "react-icons/cg";
-import { PiCirclesThree } from "react-icons/pi";
-import { SlSpeedometer } from "react-icons/sl";
-import AdminDashboard from "../Admin/dashboard";
-import EmployeeDashboard from "../Employee/dashboard";
-import TeamLeaderProfile from "../TeamLeader/dashboard/Profile/index";
-import TeamLeaderDashboard from "../TeamLeader/dashboard";
-import Payroll from "../TeamLeader/dashboard/Payroll";
-import MyData from "../Employee/dashboard/MyData";
-import AdminEmployees from "../Admin/employee";
+import AdminPayroll from "../Admin/payroll";
+import ManagePayRoll from "../Admin/payroll/nestedTabs/ManagePayroll";
+import AdminPayrollReports from "../Admin/payroll/nestedTabs/Reports";
 
 export interface Route {
   path: string;
@@ -31,8 +46,6 @@ export interface Route {
     component: React.ComponentType;
   }[];
 }
-
-
 
 export const adminRoutes: Route[] = [
   {
@@ -51,19 +64,60 @@ export const adminRoutes: Route[] = [
     path: "/attendance",
     title: "Attendance",
     icon: <RxTimer size={20} />,
-    component: AdminDashboard,
+    component: AdminAttendance,
+    nestedRoutes: [
+      {
+        path: "/attendance-reports",
+        title: "Reports",
+        component: AdminReports,
+      },
+      {
+        path: "/flagged-employees",
+        title: "Flagged Employee",
+        component: FlaggedEmployees,
+      },
+      {
+        path: "/manage-warning-log",
+        title: "Manage Warning Log",
+        component: ManageWarningLog,
+      },
+    ],
   },
   {
-    path: "/leave",
+    path: "/leave-management",
     title: "Leave Management",
     icon: <Timer size={20} />,
-    component: AdminDashboard,
+    component: AdminLeaveManagement,
+    nestedRoutes: [
+      {
+        path: "/setup-leaves",
+        title: "Set up Leaves",
+        component: SetUpLeaves,
+      },
+      {
+        path: "/leaves-balance",
+        title: "Leave Balance",
+        component: LeaveBalance,
+      },
+    ],
   },
   {
     path: "/payroll",
     title: "Payroll",
     icon: <CgCreditCard size={20} className="rotate-180" />,
-    component: AdminDashboard,
+    component: AdminPayroll,
+    nestedRoutes: [
+      {
+        path: "/manage-payroll",
+        title: "Manage Payroll",
+        component: ManagePayRoll,
+      },
+      {
+        path: "/payroll-reports",
+        title: "Reports",
+        component: AdminPayrollReports,
+      },
+    ],
   },
   {
     path: "/performance",
@@ -76,6 +130,23 @@ export const adminRoutes: Route[] = [
     title: "Teams",
     icon: <PiCirclesThree size={20} />,
     component: AdminDashboard,
+    nestedRoutes: [
+      {
+        path: "/report",
+        title: "Reports",
+        component: AdminReports,
+      },
+      {
+        path: "/flagged-employees",
+        title: "Flagged Employee",
+        component: FlaggedEmployees,
+      },
+      {
+        path: "/manage-warning-log",
+        title: "Manage Warning Log",
+        component: ManageWarningLog,
+      },
+    ],
   },
   {
     path: "/messages",

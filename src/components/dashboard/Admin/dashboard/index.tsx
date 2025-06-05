@@ -147,7 +147,7 @@ const AdminDashboard = () => {
           <ScheduleCard
             title="Your Schedule"
             items={scheduleItems.slice(0, 6)}
-            cellClassName="grid grid-cols-2 gap-x-4 gap-y-2 items-end"
+            gridClassName="grid grid-cols-2 gap-x-4 gap-y-2 items-end"
           />
         </div>
 
