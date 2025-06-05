@@ -23,49 +23,49 @@ export default function AdminEmployees() {
     data?: EmployeeFormData;
   }>({ render: false, mode: "add" });
 
-  // const mapEmployeeToFormData = (
-  //   employee: (typeof allEmployees)[0]
-  // ): EmployeeFormData => {
-  //   return {
-  //     name: employee.name,
-  //     employmentType: employee.location?.includes("Remote")
-  //       ? "Remote"
-  //       : "In-house",
-  //     location: employee.location,
-  //     rating: employee.rating,
-  //     designation: employee.position,
-  //     fullName: employee.name,
-  //     email: employee.email,
-  //     phone: parseInt(employee.phone?.replace(/\D/g, "") || "0"),
+  const mapEmployeeToFormData = (
+    employee: (typeof allEmployees)[0]
+  ): EmployeeFormData => {
+    return {
+      name: employee.name,
+      employmentType: employee.location?.includes("Remote")
+        ? "Remote"
+        : "In-house",
+      location: employee.location,
+      rating: employee.rating,
+      designation: employee.position,
+      fullName: employee.name,
+      email: employee.email,
+      phone: parseInt(employee.phone?.replace(/\D/g, "") || "0"),
 
-  //     // to ensure at least one entry exists for each array
-  //     workExperiences: [
-  //       {
-  //         previousDesignation: "",
-  //         companyName: "",
-  //         workExperience: "",
-  //         fromMonth: "",
-  //         toMonth: "",
-  //       },
-  //     ],
-  //     educations: [
-  //       {
-  //         degreeProgram: "",
-  //         instituteName: "",
-  //         eduFrom: "",
-  //         eduTo: "",
-  //       },
-  //     ],
-  //     certifications: [
-  //       {
-  //         certificationName: "",
-  //         certificationInstitute: "",
-  //         certificateFrom: "",
-  //         certificateTo: "",
-  //       },
-  //     ],
-  //   };
-  // };
+      // to ensure at least one entry exists for each array
+      workExperiences: [
+        {
+          previousDesignation: "",
+          companyName: "",
+          workExperience: "",
+          fromMonth: "",
+          toMonth: "",
+        },
+      ],
+      educations: [
+        {
+          degreeProgram: "",
+          instituteName: "",
+          eduFrom: "",
+          eduTo: "",
+        },
+      ],
+      certifications: [
+        {
+          certificationName: "",
+          certificationInstitute: "",
+          certificateFrom: "",
+          certificateTo: "",
+        },
+      ],
+    };
+  };
 
   const handleSubmit = (formData: EmployeeFormData) => {
     console.log("Submitted data:", formData);
@@ -111,14 +111,14 @@ export default function AdminEmployees() {
             CardView(allEmployees.filter((emp) => emp.onLeave))
           ) : (
             <TableView
-              // data={allEmployees.filter((emp) => emp.onLeave)}
-              // onRowClick={(row) =>
-              //   setToggleEmployeeForm({
-              //     render: true,
-              //     mode: "edit",
-              //     data: mapEmployeeToFormData(row),
-              //   })
-              // }
+              data={allEmployees.filter((emp) => emp.onLeave)}
+              onRowClick={(row) =>
+                setToggleEmployeeForm({
+                  render: true,
+                  mode: "edit",
+                  data: mapEmployeeToFormData(row),
+                })
+              }
             />
           )}
 
@@ -141,14 +141,14 @@ export default function AdminEmployees() {
             CardView(allEmployees.filter((emp) => !emp.onLeave))
           ) : (
             <TableView
-              // data={allEmployees.filter((emp) => !emp.onLeave)}
-              // onRowClick={(row) =>
-              //   setToggleEmployeeForm({
-              //     render: true,
-              //     mode: "edit",
-              //     data: mapEmployeeToFormData(row),
-              //   })
-              // }
+              data={allEmployees.filter((emp) => !emp.onLeave)}
+              onRowClick={(row) =>
+                setToggleEmployeeForm({
+                  render: true,
+                  mode: "edit",
+                  data: mapEmployeeToFormData(row),
+                })
+              }
             />
           )}
         </section>
