@@ -1,6 +1,6 @@
 
 import { Attendance } from "./attendance/index";
-import { Employee } from "./employee/views/TableView";
+// import { Employee } from "./employee/views/TableView";
 
 ///////////////////////////////// Dashboard ///////////////////////////////////////////
 
@@ -138,6 +138,17 @@ export const mockMessages = [
 ];
 
 ///////////////////////////////// employee ///////////////////////////////////////////
+export interface Employee {
+  id: string;
+  name: string;
+  position: string;
+  location: string;
+  phone: string;
+  rating?: string;
+  email: string;
+  isOffline: boolean;
+  onLeave?: boolean;
+}
 
 export const allEmployees: Employee[] = [
   {
