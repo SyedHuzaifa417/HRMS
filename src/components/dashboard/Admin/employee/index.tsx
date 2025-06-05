@@ -2,8 +2,6 @@
 
 import React, { useState } from "react";
 import { allEmployees } from "../tempData";
-// import EmployeeTable from "@/components/dashboard/Admin/employee/views/TableView";
-// import { CardView } from "@/components/dashboard/Admin/employee/views/CardView";
 
 import { Switch } from "@/components/ui/switch";
 import { MdGridView, MdList } from "react-icons/md";
@@ -12,8 +10,8 @@ import Forms from "@/components/ui/shared/Forms";
 import { EmployeeFormData } from "@/components/ui/shared/Forms/types/types";
 import { Button } from "@/components/ui/button";
 import { IoChevronBack } from "react-icons/io5";
-import { CardView } from "./components/card";
-import { TableView } from "./components/table";
+import { CardView } from "./view/cardView";
+import { TableView } from "./view/tableView";
 
 export default function AdminEmployees() {
   const [toggleLeaveView, setToggleLeaveView] = useState(true);

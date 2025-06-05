@@ -1,6 +1,5 @@
 
 import { Attendance } from "./attendance/index";
-// import { Employee } from "./employee/views/TableView";
 
 ///////////////////////////////// Dashboard ///////////////////////////////////////////
 
